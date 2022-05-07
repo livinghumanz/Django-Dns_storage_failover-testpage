@@ -18,7 +18,7 @@ def home(request):
         contact = f_data['no']
         loc = f_data['loc']
         #hresp = "<p>"+name+ email +college+contact+loc+ "<p>"
-        #reg = Register.objects.create(name= name,mailid=email,college= college,contact=contact,loc=loc)
+        reg = Register.objects.create(name= name,mailid=email,college= college,contact=contact,loc=loc)
         #return HttpResponse(hresp)
         return render(request,'monthlych/index.html',{'regdata':regdata,'data':'you have registered your information, please check the admin portal'})
     #return HttpResponse("<h1>iam inside chal</h1>")
