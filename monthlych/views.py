@@ -2,12 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse, request, HttpResponseRedirect
 from monthlych.models import Register
 import socket
+import subprocess
 
 
 # Create your views here.
 def home(request):
     hostname=socket.gethostname()
-    regdata = 'Host name : {hostname} \n Host Ip :{hostip} '.format(hostname=hostname,hostip=socket.gethostbyname(hostname))
+    hip = subprocess.run(['curl','ifconfig.me'],stdout=subprocess.PIPE)
+    regdata = 'Host name : {hostname} \n Host Ip :{hostip} '.format(hostname=hostname,hostip='{a} ( {b} )'.format(a=hip.stdout,b=socket.gethostbyname(hostname)))
     if request.method =='POST':
         f_data=request.POST
         name= f_data['name']
